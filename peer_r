@@ -1,1 +1,76 @@
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include <algorithm>
+#include <string>
+
+
+class Reading_handler {
+	
+public:
+	Reading_handler()
+		:users_(MAX_NUM_OF_USERS, 0)
+		, pages_(MAX_PAGES, 0)
+	{
+	}
+
+	void Read(int user, int page_num) {
+        
+		if (users_[user] == 0) {
+			for (int i = 0; i <= page_num; ++i) {
+				++pages_[i];
+			}
+		}
+		else {
+			for (int i = users_[user] + 1; i <= page_num; ++i) {
+				++pages_[i];
+			}
+    }
+        users_[user] = page_num;
+	}
+
+	void Cheer(int user) {
+		if(users_[user] == 0) {
+			std::cout << 0 << std::endl;
+		}
+		else if (pages_[0] == 1) {
+			std::cout << 1 << std::endl;
+		}
+		else {
+			int user_page_num = users_[user];
+			double result = (pages_[0] - pages_[user_page_num]) * 1.0 / (pages_[0] - 1) * 1.0;
+			std::cout << std::setprecision(6) << result << std::endl;
+		}
+	}
+
+
+private:
+    static const int MAX_NUM_OF_USERS = 100000;
+	static const int MAX_PAGES = 1000;
+
+	std::vector<int> users_;
+	std::vector<int> pages_;
+
+};
+
+
+int main() {
+	Reading_handler ebook;
+	int num_req;
+	std::cin >> num_req;
+	for (int i = 0; i < num_req; ++i) {
+		std::string req;
+		std::cin >> req;
+		if (req == "READ") {
+			int user, page;
+			std::cin >> user >> page;
+			ebook.Read(user, page);
+		}
+		if (req == "CHEER") {
+			int user;
+			std::cin >> user;
+			ebook.Cheer(user);
+		}
+	}
+}
 
