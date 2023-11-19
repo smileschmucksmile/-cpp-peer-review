@@ -1,3 +1,4 @@
+using namespace std;
 struct Country {
     string country_name;
     string country_iso_code;
@@ -7,7 +8,7 @@ struct Country {
 };
 
 
-// Дана функция ParseCitySubjson, обрабатывающая JSON-объект со списком городов конкретной страны:
+// Г„Г Г­Г  ГґГіГ­ГЄГ¶ГЁГї ParseCitySubjson, Г®ГЎГ°Г ГЎГ ГІГ»ГўГ ГѕГ№Г Гї JSON-Г®ГЎГєГҐГЄГІ Г±Г® Г±ГЇГЁГ±ГЄГ®Г¬ ГЈГ®Г°Г®Г¤Г®Гў ГЄГ®Г­ГЄГ°ГҐГІГ­Г®Г© Г±ГІГ°Г Г­Г»:
 void ParseCitySubjson(vector<City>& cities, const Json& json, Country data) {
     for (const auto& city_json : json.AsList()) {
         const auto& city_obj = city_json.AsObject();
@@ -17,7 +18,7 @@ void ParseCitySubjson(vector<City>& cities, const Json& json, Country data) {
     }
 }
 
-// ParseCitySubjson вызывается только из функции ParseCountryJson следующим образом:
+// ParseCitySubjson ГўГ»Г§Г»ГўГ ГҐГІГ±Гї ГІГ®Г«ГјГЄГ® ГЁГ§ ГґГіГ­ГЄГ¶ГЁГЁ ParseCountryJson Г±Г«ГҐГ¤ГіГѕГ№ГЁГ¬ Г®ГЎГ°Г Г§Г®Г¬:
 void ParseCountryJson(vector<Country>& countries, vector<City>& cities, const Json& json) {
     for (const auto& country_json : json.AsList()) {
         const auto& country_obj = country_json.AsObject();
