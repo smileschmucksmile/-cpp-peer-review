@@ -1,6 +1,6 @@
 
 struct DBData {
-    string_view db_name;
+    std::string_view db_name;
     bool db_allow_exceptions;
     int db_connection_timeout;
     DBLogLevel db_log_level;
@@ -11,7 +11,7 @@ struct Age {
     int min_age;
 };
 
-vector<Person> LoadPersons(DBData db_data, Age age, string_view name_filter) 
+vector<Person> LoadPersons(DBData db_data, Age age, std::string_view name_filter) 
 {
     DBConnector connector(db_data.db_allow_exceptions, db_data.db_log_level);
     DBHandler db;
@@ -25,7 +25,7 @@ vector<Person> LoadPersons(DBData db_data, Age age, string_view name_filter)
         return {};
     }
 
-    vector<Person> persons;
+    std::vector<Person> persons;
     DBQuery query = GetQueryString(age, name_filter, db);
     for (auto [name, age] : db.LoadRows<string, int>(query)) {
         persons.push_back({ move(name), age });
@@ -33,9 +33,9 @@ vector<Person> LoadPersons(DBData db_data, Age age, string_view name_filter)
     return persons;
 }
 
-DBQuery GetQueryString(Age age, string_view name_filter, DBHandler& db)
+DBQuery GetQueryString(Age age, std::string_view name_filter, DBHandler& db)
 {
-    ostringstream query_str;
+    std::ostringstream query_str;
     query_str << "from Persons "s
         << "select Name, Age "s
         << "where Age between "s << Age.min_age << " and "s << Age.max_age << " "s
