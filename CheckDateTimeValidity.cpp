@@ -15,7 +15,7 @@ void CheckDateTimeValidity(const DateTime& dt) {
 
 }
 
-void CheckValidity(int given_time, int standart_time_min, int standart_time_max, string time)
+void CheckValidity(int given_time, int standart_time_min, int standart_time_max, std::string time)
 {
     if (given_time < standart_time_min) {
         throw domain_error(time + "is too small");
