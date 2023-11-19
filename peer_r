@@ -25,7 +25,7 @@ public:
 			for (int i = users_[user] + 1; i <= page_num; ++i) {
 				++pages_[i];
 			}
-    }
+        }
         users_[user] = page_num;
 	}
 
